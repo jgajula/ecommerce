@@ -68,7 +68,7 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.php"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                             <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                         </ul>
                     </div>
@@ -97,7 +97,7 @@
                                     <li><a href="shop.html">Products</a></li>
                                     <li><a href="product-details.html">Product Details</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="cart.php">Cart</a></li>
+                                    <li><a href="cart.html">Cart</a></li>
                                     <li><a href="login.html">Login</a></li>
                                 </ul>
                             </li>
@@ -117,19 +117,46 @@
 
 <div id="contact-page" class="container">
 
-    <div id="category-description"><h2>Frequently Asked Questions</h2>
+<div class="col-sm-9 padding-right col-sm-offset-1">
+					<div class="features_items"><!--features_items-->
+						<h2 class="title text-center">New Items</h2>
+<?php
+require_once("dbcontroller.php");
+$db_handle = new DBController();
+// $current_category = $_GET['category'];
+$current_category = "mens";
+$current_query = "SELECT * FROM products WHERE category = '".$current_category."' ORDER BY id ASC";
+	$product_array = $db_handle->runQuery($current_query);
+	if (!empty($product_array)) {
+		foreach($product_array as $key=>$value){
+	?>
+						<div class="col-sm-4">
+							<div class="product-image-wrapper">
+								<div class="single-products">
+									<div class="productinfo text-center">
+										<img src="images/<?php echo $product_array[$key]["image"]; ?>">
+										<h2>$<?php echo $product_array[$key]["price"]; ?></h2>
+										<p><?php echo $product_array[$key]["name"]; ?></p>
+										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+									</div>
+									<div class="product-overlay">
+										<div class="overlay-content">
+											<h2>$<?php echo $product_array[$key]["price"]; ?></h2>
+											<p><?php echo $product_array[$key]["name"]; ?></p>
+											<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+	<?php
+			}
+	}
+	?>
 
-        <h3>1. WHAT IS THE QUICKEST WAY TO CHECK ON MY ORDER?</h3>
-        <p>If ordered by phone or through a retail store, please contact Customer Service for your order status at 1-800-444-3353, Monday thru Saturday, 5am to 9pm (PT) and Sunday, 6am to 6pm (PT), or by email at info@mystyle.com</p>
-        <h3>2. HOW DO I ORDER REPLACEMENT PARTS?</h3>
-        <p>Many of our products have replacement parts available for purchase. To purchase a part, please contact Customer Service at 1-800-444-3353, Monday thru Saturday 5am to 9pm (PT), Sunday 6am to 6pm (PT), or via email. Specify the product name, item number and description of the part when making your inquiry.</p>
-        <h3>3. HOW DO I SET UP MY ITEM?</h3>
-        <p>If a product manual is available for an item, it will be available through the product page, located on the "Product Manual" tab.</p>
-        <h3>4. WHO CAN HELP WITH TECHNICAL PRODUCT QUESTIONS?</h3>
-        <p>For technical product advice, call 1-888-866–5797, Monday thru Friday, 7am to 4pm (PT). For more information, please visit our Customer Service page.</p>
-        <h3>5. WHAT PAYMENT METHODS DO YOU ACCEPT?</h3>
-        <p>We accept MasterCard, VISA, Discover and American Express. If you would like to pay by personal check, money order, or wire transfer, please call our Customer Service Department at 1-800-444-3353, Monday thru Saturday, 5am to 9pm (PT) and Sunday, 6am to 6pm (PT).</p>
-</div>
+
+					</div><!--features_items-->
+				</div>
 
 </div>
 

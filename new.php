@@ -123,7 +123,7 @@
 <?php
 require_once("dbcontroller.php");
 $db_handle = new DBController();
-	$product_array = $db_handle->runQuery("SELECT * FROM products ORDER BY id ASC");
+	$product_array = $db_handle->runQuery("SELECT * FROM products WHERE status = 'new' ORDER BY id ASC");
 	if (!empty($product_array)) {
 		foreach($product_array as $key=>$value){
 	?>
